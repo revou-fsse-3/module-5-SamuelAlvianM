@@ -3,7 +3,7 @@ import {
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
-import { forecastType, ForecastRespone } from "@features/types";
+import { forecastType } from "@features/types";
 import ForecastDisplay from "@components/Layout/Forecast";
 
 interface CityProps {
@@ -50,11 +50,5 @@ const getForecast = async (lat: string, lon: string) => {
     throw Error("failed to fetch");
   }
   const response = (await request.json()) as unknown;
-
-  //   const forecastData = {
-  //     ...response
-  //     cityNae: request.
-  //   };
-
   return response as forecastType;
 };

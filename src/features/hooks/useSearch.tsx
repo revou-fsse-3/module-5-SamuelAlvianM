@@ -6,7 +6,6 @@ import {
   useContext,
   FC,
 } from "react";
-
 import { optionType } from "../types/index";
 
 const BASE_URL = "http://api.openweathermap.org";
