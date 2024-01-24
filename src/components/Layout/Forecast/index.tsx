@@ -1,8 +1,8 @@
-import Degree from '../../components/Degree'
-import Sunrise from '../../components/Icons/Sunrise'
-import Sunset from '../../components/Icons/Sunset'
-import Tile from './Tile'
-import React from 'react';
+import Degree from "@components/Icons/Degree";
+import Sunrise from "@components/Icons/Sunrise";
+import Sunset from "@components/Icons/Sunset";
+import Tile from "./Tile";
+import React from "react";
 
 import {
   getHumidityValue,
@@ -10,20 +10,19 @@ import {
   getVisibilityValue,
   getSunTime,
   getPop,
-} from '../../helpers'
-
-import { forecastType } from '../../types'
+} from "@features/helpers";
+import { forecastType} from "@features/types";
 
 type Props = {
   data: forecastType;
 };
 
-
 const Forecast = ({ data }: Props) => {
   const today = data.list[0];
-
+  console.log(data);
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
+      {/* <h1>{data.}</h1> */}
       <div className="mx-auto w-[300px]">
         <section className="text-center">
           <h2 className="text-2xl font-black">
@@ -36,7 +35,7 @@ const Forecast = ({ data }: Props) => {
             {today.weather[0].main} ({today.weather[0].description})
           </p>
           <p className="text-sm">
-            H: <Degree temp={Math.ceil(today.main.temp_max)} /> L:{' '}
+            H: <Degree temp={Math.ceil(today.main.temp_max)} /> L:{" "}
             <Degree temp={Math.floor(today.main.temp_min)} />
           </p>
         </section>
@@ -48,7 +47,7 @@ const Forecast = ({ data }: Props) => {
               className="inline-block text-center w-[50px] flex-shrink-0"
             >
               <p className="text-sm">
-                {i === 0 ? 'Now' : new Date(item.dt * 1000).getHours()}
+                {i === 0 ? "Now" : new Date(item.dt * 1000).getHours()}
               </p>
               <img
                 alt={`weather-icon-${item.weather[0].description}`}
@@ -84,8 +83,8 @@ const Forecast = ({ data }: Props) => {
             info={<Degree temp={Math.round(today.main.feels_like)} />}
             description={`Feels ${
               Math.round(today.main.feels_like) < Math.round(today.main.temp)
-                ? 'colder'
-                : 'warmer'
+                ? "colder"
+                : "warmer"
             }`}
           />
           <Tile
@@ -105,7 +104,7 @@ const Forecast = ({ data }: Props) => {
             title="Pressure"
             info={`${today.main.pressure} hPa`}
             description={` ${
-              Math.round(today.main.pressure) < 1013 ? 'Lower' : 'Higher'
+              Math.round(today.main.pressure) < 1013 ? "Lower" : "Higher"
             } than standard`}
           />
           <Tile
@@ -117,7 +116,7 @@ const Forecast = ({ data }: Props) => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Forecast
+export default Forecast;

@@ -1,16 +1,16 @@
-import Feels from '../../components/Icons/Feels'
-import Humidity from '../../components/Icons/Humidity'
-import Pop from '../../components/Icons/Pop'
-import Pressure from '../../components/Icons/Pressure'
-import Visibility from '../../components/Icons/Visibility'
-import Wind from '../../components/Icons/Wind'
+import Feels from "@components/Icons/Feels";
+import Humidity from "@components/Icons/Humidity";
+import Pop from "@components/Icons/Pop";
+import Pressure from "@components/Icons/Pressure";
+import Visibility from "@components/Icons/Visibility";
+import Wind from "@components/Icons/Wind";
 
 type Props = {
-  icon: 'wind' | 'feels' | 'humidity' | 'visibility' | 'pressure' | 'pop'
-  title: string
-  info: string | JSX.Element
-  description?: string | JSX.Element
-}
+  icon: "wind" | "feels" | "humidity" | "visibility" | "pressure" | "pop";
+  title: string;
+  info: string | JSX.Element;
+  description?: string | JSX.Element;
+};
 
 const icons = {
   wind: Wind,
@@ -19,10 +19,10 @@ const icons = {
   visibility: Visibility,
   pressure: Pressure,
   pop: Pop,
-}
+};
 
 const Tile = ({ icon, title, info, description }: Props): JSX.Element => {
-  const Icon = icons[icon]
+  const Icon = icons[icon];
 
   return (
     <article className="w-[140px] h-[130px] text-zinc-700 bg-white/20 backdrop-blur-ls rounded drop-shadow-lg p-2 mb-5 flex flex-col justify-between">
@@ -33,6 +33,6 @@ const Tile = ({ icon, title, info, description }: Props): JSX.Element => {
 
       <div className="text-xs font-bold">{description}</div>
     </article>
-  )
-}
-export default Tile
+  );
+};
+export default Tile;

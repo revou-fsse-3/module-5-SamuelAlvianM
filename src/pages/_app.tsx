@@ -1,23 +1,18 @@
-import "@/styles/globals.css";
+import React from 'react';
+import Suggestions from '@/components/Layout/Suggestion';  // Adjust the path accordingly
+import { SearchProvider } from "@/features/hooks/useSearch";
 import type { AppProps } from "next/app";
-import Search from "../Layout/Search"
+import Search from "@/components/Layout/Search";  // Adjust the path accordingly
 
 export default function App({ Component, pageProps }: AppProps) {
-
-  const { term, options, onInputChange, onOptionSelect, onSubmit, data, error, selectedCity } = pageProps;
-
-  return(
-    <Search
-    term={term}
-    options={options}
-    onInputChange={onInputChange}
-    onOptionSelect={onOptionSelect}
-    onSubmit={onSubmit}
-    data={data}
-    error={error}
-    city={selectedCity}
-    >
+  return (
+    <main className="relative">
       <Component {...pageProps} />
-    </Search>
-  ) ;
+      <SearchProvider>
+        <Search />
+        <Suggestions />
+      </SearchProvider>
+    </main>
+  );
 }
+
