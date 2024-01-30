@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Degree component renders correctly 1`] = `
+<span
+  role="degree"
+>
+  25
+  <sup>
+    o
+  </sup>
+  C
+</span>
+`;
