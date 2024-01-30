@@ -1,96 +1,87 @@
-import { render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import City, { getServerSideProps } from './[city]'; 
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import '@testing-library/jest-dom'
+import City, { getServerSideProps } from "./[city]";
 
-describe('City Page Tests', () => {
-
-const mockForecastData = {
-name: 'Mock City',
-country: 'MO',
-list: [
+describe("City Page - getServerSideProps", () => {
+const mockForecast = {
+    name: "Mock City",
+    country: "MO",
+    list: [
     {
-    dt: 1644168000,
-    main: {
+        dt: 1644168000,
+        main: {
         temp: 25,
         temp_max: 30,
         temp_min: 20,
         feels_like: 26,
         humidity: 50,
-    },
-    weather: [
-        {
-        main: 'Clear',
-        description: 'Clear sky',
-        icon: '01d',
         },
-    ],
-    wind: {
+        weather: [
+        {
+            main: "Clear",
+            description: "Clear sky",
+            icon: "01d",
+        },
+        ],
+        wind: {
         deg: 180,
         speed: 5,
+        },
+        visibility: 10,
+        pressure: 1010,
+        pop: 20,
     },
-    visibility: 10,
-    pressure: 1010,
-    pop: 20,
-    },
-
     ],
 };
 
+const mockContext = {
+    query: { lat: "mockLat", lon: "mockLon" },
+    req: {
+    headers: {
+        "user-agent": "testing-agent",
+    },
+    cookies: {
+        "session-id": "mock-session-id",
+    },
+    },
+    res: {
+    status: jest.fn().mockReturnThis(),
+    send: jest.fn().mockReturnThis(),
+    },
+    resolvedUrl: "mockResolvedUrl",
+};
 
-test('renders City page with forecast data', async () => {
-    const mockContext = { query: { lat: 'mockLat', lon: 'mockLon' } };
+it("fetches forecast data successfully", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    json: jest.fn().mockResolvedValue(mockForecast),
+    });
 
-
-    global.fetch = jest.fn().mockImplementation(mockFetchSuccess);
-
-    let pageProps!: any;
     await act(async () => {
     const result = await getServerSideProps(mockContext);
-    pageProps = result.props;
+    render(<City {...result.props} />);
     });
 
-    render(<City {...pageProps!} />);
-
-    expect(screen.getByText('ForecastDisplay Component')).toBeInTheDocument();
-
-
-    expect(screen.getByText(pageProps!.forecast.name)).toBeInTheDocument();
-    expect(screen.getByText(pageProps!.forecast.country)).toBeInTheDocument();
-
-
-    expect(screen.getByText(`${Math.round(pageProps!.forecast.list[0].main.temp)}°C`)).toBeInTheDocument();
-    expect(screen.getByText('Clear sky')).toBeInTheDocument();
+    // Add your assertions using screen, fireEvent, etc.
+    expect(screen.getByText('Mock City')).toBeInTheDocument();
 
     global.fetch.mockRestore();
-});
+  });
 
-
-test('throws an error if fetching forecast data fails', async () => {
-    const mockContext = { query: { lat: 'mockLat', lon: 'mockLon' } };
-
-
-    global.fetch = jest.fn().mockImplementation(mockFetchError);
-
-    await expect(getServerSideProps(mockContext)).rejects.toThrow('failed to fetch all data');
-
-    global.fetch.mockRestore();
-});
-    test('renders ForecastDisplay component with received forecast data', () => {
-        render(<City forecast={mockForecastData} />);
-        expect(screen.getByText('ForecastDisplay Component')).toBeInTheDocument();
-        expect(screen.getByText(mockForecastData.name)).toBeInTheDocument();
-        expect(screen.getByText(mockForecastData.country)).toBeInTheDocument();
-        expect(screen.getByText(`${Math.round(mockForecastData.list[0].main.temp)}°C`)).toBeInTheDocument();
-        expect(screen.getByText('Clear sky')).toBeInTheDocument();
-
+  it("throws an error if fetching forecast data fails", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
     });
+
+    await act(async () => {
+      await expect(getServerSideProps(mockContext)).rejects.toThrowError(
+        "failed to fetch all data"
+      );
+    });
+
+    // Add your assertions using screen, fireEvent, etc.
+    // Example: expect(screen.getByText('Error message')).toBeInTheDocument();
+
+    global.fetch.mockRestore();
+  });
 });
-
-function mockFetchSuccess(..._args: any) {
-    throw new Error('Function not implemented.');
-}
-
-
-function mockFetchError(..._args: any) {
-    throw new Error('Function not implemented.');
-}

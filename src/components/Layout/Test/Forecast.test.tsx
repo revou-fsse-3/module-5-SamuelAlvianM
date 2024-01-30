@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Forecast from '../Forecast';
+import '@testing-library/jest-dom'
 import Sunset from '../../Icons/Sunset';
 
 type ForecastType = {

@@ -12,8 +12,8 @@ interface CityProps {
 export const getServerSideProps: GetServerSideProps<CityProps> = async (
   context
 ) => {
-  const cityLat = (context.query!["lat"] as string) ?? "";
-  const cityLon = (context.query!["lon"] as string) ?? "";
+  const cityLat = (context.query.lat as string) ?? "";
+  const cityLon = (context.query.lon as string) ?? "";
   try {
     const fetchForecast = await getForecast(cityLat, cityLon);
     return {
@@ -52,3 +52,5 @@ const getForecast = async (lat: string, lon: string) => {
   const response = (await request.json()) as unknown;
   return response as forecastType;
 };
+
+

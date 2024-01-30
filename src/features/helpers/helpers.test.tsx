@@ -4,7 +4,7 @@ import {
     getVisibilityValue,
     getSunTime,
     getPop,
-  } from '.'; // Adjust the path based on your actual file structure
+} from '.'; 
 
 describe('Utility Functions Tests', () => {
     describe('getWindDirection', () => {
@@ -30,8 +30,8 @@ describe('Utility Functions Tests', () => {
 
     describe('getSunTime', () => {
     test('returns formatted time string', () => {
-        // Assuming the timestamp represents a time like 12:30 PM
-        const timestamp = 1644168000; // Adjust the timestamp as needed
+
+        const timestamp = 1644168000; 
         expect(getSunTime(timestamp)).toBe('12:30');
     });
     });

@@ -24,10 +24,10 @@ describe('SearchProvider and useSearch Tests', () => {
     const searchButton = screen.getByText('Search');
     userEvent.click(searchButton);
 
-    // Wait for the fetch operation to complete
+
     await waitFor(() => {
       const optionsLength = screen.getByTestId('options-length');
-      expect(optionsLength.textContent).toBe('5'); // Assuming you expect 5 options based on the fetch URL in _getSearchOptions
+      expect(optionsLength.textContent).toBe('5'); 
     });
   });
 
@@ -41,10 +41,9 @@ describe('SearchProvider and useSearch Tests', () => {
     const searchButton = screen.getByText('Search');
     userEvent.click(searchButton);
 
-    // Wait for the fetch operation to complete
     await waitFor(() => {
       const optionsLength = screen.getByTestId('options-length');
-      expect(optionsLength.textContent).toBe('0'); // Assuming an empty array is expected on empty search
+      expect(optionsLength.textContent).toBe('0'); 
     });
   });
 });
