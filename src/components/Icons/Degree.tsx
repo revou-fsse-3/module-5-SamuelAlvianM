@@ -1,6 +1,6 @@
 const Degree = ({ temp }: { temp: number }): JSX.Element => (
   <>
-    <span>
+    <span data-testid="degree">
       {temp}
       <sup>o</sup>C
     </span>

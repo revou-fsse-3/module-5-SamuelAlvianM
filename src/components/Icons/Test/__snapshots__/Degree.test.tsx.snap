@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Degree component renders correctly 1`] = `
+<span
+  data-testid="degree"
+>
+  25
+  <sup>
+    o
+  </sup>
+  C
+</span>
+`;

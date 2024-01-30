@@ -1,4 +1,4 @@
-import useDebaunce from "@/features/hooks/useDebaunce";
+import useDebaunce from "@/features/hooks/useDebounce";
 import useSearch from "@/features/hooks/useSearch";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, HTMLAttributes, PropsWithChildren, useEffect, useState } from "react";
